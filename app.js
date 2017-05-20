@@ -30,6 +30,9 @@ app.get('/',(req,res)=>{
 	res.json({msg:"SLIIT AF online sample rest api"});
 });
 
+const authors = require('./app/routes/authors.js');
+app.use('/authors',authors);
+
 app.listen(port,(err)=>{
 	if(err){
 		console.log(err);
