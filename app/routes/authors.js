@@ -60,7 +60,28 @@ router.get('/:id/posts',(req,res)=>{
 
 	});
 });
-router.post('/:id/posts',(req,res)=>{});
+router.post('/:id/posts',(req,res)=>{
+	const user_id = req.params.id;
+	const topic = req.body.topic;
+	const content = req.body.content;
+
+	var newPost = Post({
+		topic: topic,
+		content : content,
+		author : user_id
+	});
+
+	Post.addPost(newPost,(err,post)=>{
+		if(err){
+			console.log(err);
+			res.status(500).json({success:false,msg:"Error Occcured"});
+		}else if(post.name != ""){
+			res.status(200).json({success:true,msg: "Posted successfully" });
+		}else{
+			res.status(200).json({success:false,msg:"Post cannot be saved"});
+		}
+	});
+});
 
 router.get('/:id/posts/:id',(req,res)=>{});
 router.put('/:id/posts/:id',(req,res)=>{});
