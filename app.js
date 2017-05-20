@@ -29,8 +29,9 @@ app.use(bodyParser.json());
 app.get('/',(req,res)=>{
 	res.json({msg:"SLIIT AF online sample rest api"});
 });
-
+const posts = require('./app/routes/posts.js');
 const authors = require('./app/routes/authors.js');
+app.use('/posts',posts);
 app.use('/authors',authors);
 
 app.listen(port,(err)=>{
